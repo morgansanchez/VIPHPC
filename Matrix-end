@@ -1,0 +1,35 @@
+#define SIZE 5000
+
+double a[SIZE][SIZE];
+double b[SIZE][SIZE];
+double c[SIZE][SIZE];
+double d[SIZE][SIZE];
+
+int main()
+{
+  int i,j,k;
+  double t1, t2;
+  double tmp;
+  
+  for (i = 0; i < SIZE; ++i) {
+    for (j = 0; j < SIZE; ++j) {
+      a[i][j] = (double)(i + j);
+      b[i][j] = (double)(i - j);
+      c[i][j] = 0.0f;
+      d[i][j] = 0.0f;
+    }
+  }
+#pragma acc data copyin(a,b) copy(c)
+#pragma acc kernels
+#pragma acc loop tile(32,32)
+  for (i = 0; i < SIZE; ++i) {
+    for (j = 0; j < SIZE; ++j) {
+      tmp=0.0f;
+#pragma acc loop reduction(+:tmp)
+      for (k = 0; k < SIZE; ++k) {
+        tmp += a[i][k] * b[k][j];
+      }
+      c[i][j] = tmp;
+    }
+  }
+
