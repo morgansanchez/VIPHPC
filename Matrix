@@ -1,0 +1,12 @@
+
+
+#pragma acc kernels
+{
+for ( i =0; i <s i z e ; i ++) {
+  for ( j =0; j<s i z e ; j ++) {
+    for ( k=0; k<s i z e ; k++) {
+      C[ i ] [ j ] += A[ i ] [ k ] ∗B[ k ] [ j ] ;
+      }
+    }
+  }
+}
