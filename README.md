@@ -49,4 +49,4 @@ The parallelization came in:
   }
   
   
-Overall, better results were seen with bigger numbers. You were able to get the idea of the timing when more data was being processed. The GPU ran better than the CPU as expected. 
+Overall, better results were seen with bigger numbers. You were able to get the idea of the timing when more data was being processed. The GPU ran better than the CPU as expected. With a prama just in the main, there was about a 21 x speed up and a 140 x speed up in both functions and loops. 
